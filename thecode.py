@@ -69,7 +69,7 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("final with link replaced: " + finalText)
         #send the new link back to the chat
         await context.bot.send_message(chat_id=update.effective_chat.id,text=finalText)
-        await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True,text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com) for more info',parse_mode='MarkdownV2')
+        await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True,text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info',parse_mode='MarkdownV2')
 
     else:
         if update.message.text.__contains__("https://x.com"):
@@ -87,7 +87,7 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
             print("final with link replaced: " + finalText)
             # send the new link back to the chat
             await context.bot.send_message(chat_id=update.effective_chat.id, text=finalText)
-            await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com) for more info', parse_mode='MarkdownV2')
+            await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
         else:
             if update.message.text.__contains__("https://www.instagram.com"):
                 # set the source text to originalText
@@ -104,7 +104,7 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 print("final with link replaced: " + finalText)
                 # send the new link back to the chat
                 await context.bot.send_message(chat_id=update.effective_chat.id, text=finalText)
-                await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com) for more info', parse_mode='MarkdownV2')
+                await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
             else:
                 if update.message.text.__contains__("https://www.tiktok.com"):
                     # set the source text to originalText
@@ -120,7 +120,7 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     print("final with link replaced: " + finalText)
                     # send the new link back to the chat
                     await context.bot.send_message(chat_id=update.effective_chat.id, text=finalText)
-                    await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com) for more info', parse_mode='MarkdownV2')
+                    await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
 
 
 #
