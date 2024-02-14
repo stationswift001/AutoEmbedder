@@ -1,20 +1,42 @@
+
 # AutoEmbedder
-<p>
-<img align="center" src="built-with-military-grade-explosives.svg"/>
-<img align="center" src="not-a-virus.svg" />
-<img align="center" src="the-voices-are-so-loud.svg" />
-</p>
 
-A Telegram bot written in python that detects links and automatically embeds them
+A Telegram bot that automatically sends the embeddable form of a sent link
 
 
-first real python program ever??
-how did he do it???
-shoutout [mlgnez](https://github.com/mlgnez) he coded like most of it
+## Deployment
 
-credit me on [telegram](https://t.me/stationswift) or something
+To deploy this project:
 
-how to get the bot working? idk figure it out
+1. Create a bot with @BotFather on telegram and copy the token it gives you.
+
+2. run ```/setprivacy```, choose the bot you just created and DISABLE Bot Privacy
+
+3. set `API_KEY=` in your .env file to the token you copied in step 1
+
+4. Install the dependencies with 
+```bash
+  pip3 install -r requirements.txt
+```
+5. Set up & start screen to keep running when the terminal is closed (Ubuntu only)
+```bash
+  sudo apt-get update && sudo apt-get update && sudo apt-get install screen -y && screen
+```
+6. Run the script with
+```bash
+  python3 thecode.py
+```
+## Authors
+
+- [@mlgnez](https://www.github.com/mlgnez)
+- [Me!](https://www.github.com/stationswift001)
+
+## License
+
+please credit me if you use this
 
 
-oh yeah make sure you add a .env file with API_KEY=[your api key] to your project folder ok thanks
+## Acknowledgements
+
+ - mlgnez as mentioned above, he's awesome
+ - me for managing to code this as it's my first project ever
