@@ -26,6 +26,8 @@ To deploy this project:
 ```bash
   python3 thecode.py
 ```
+7. Run /start
+
 ## Authors
 
 - [@mlgnez](https://www.github.com/mlgnez)
