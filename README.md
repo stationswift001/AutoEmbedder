@@ -30,6 +30,7 @@ To deploy this project:
 
 - [@mlgnez](https://www.github.com/mlgnez)
 - [Me!](https://www.github.com/stationswift001)
+- [Choco](https://github.com/chocowaffls) helped me figure out part of the toggleshill code
 
 ## License
 
