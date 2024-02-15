@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler, ContextTypes
@@ -15,6 +16,8 @@ originalText = ""
 newText1 = ""
 newText2 = ""
 shill = True
+chat = {}
+thischat = 0
 
 
 
@@ -35,30 +38,43 @@ def after_string(input_string, search_string):
         return input_string[:index + len(search_string)]
     return input_string
 
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    chatid = update.effective_chat.id
+    shill = True
+    chat[chatid] = {'shill': shill,}
+    with open('chatdata.json', 'w') as f:
+        json.dump(chat, f)
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Bot Started and prefrences updated! \n To toggle the shill message on and off, use /enableshill and /disableshill")
 
+async def enableshill(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    chatid = update.effective_chat.id
+    chatid2 = str(update.effective_chat.id)
+    shill = True
+    chat[chatid] = {'shill': shill,}
+    with open('chatdata.json', 'r') as f:
+        data = json.load(f)
+        print(data)
+    if data[chatid2]['shill'] != True:
+        data[chatid2]["shill"] = True
+        print(data)
+        with open("chatdata.json", 'w') as f:
+            json.dump(data, f)
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Preference Updated!")
 
-
-
-
-
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
-
-async def toggle_shill(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    global shill
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Shill Toggled!")
-    if (shill == True):
-        shill = not shill
-        print("set shill false")
-    else:
-        shill = not shill
-        print("set shill true")
-
-
-
-
-
-
+async def disableshill(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    chatid = update.effective_chat.id
+    chatid2 = str(update.effective_chat.id)
+    shill = False
+    chat[chatid] = {'shill': shill,}
+    with open('chatdata.json', 'r') as f:
+        data = json.load(f)
+        print(data)
+    if data[chatid2]['shill'] != False:
+        data[chatid2]["shill"] = False
+        print(data)
+        with open("chatdata.json", 'w') as f:
+            json.dump(data, f)
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Preference Updated!")
 
 
 async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -78,7 +94,10 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("final with link replaced: " + finalText)
         #send the new link back to the chat
         await context.bot.send_message(chat_id=update.effective_chat.id,text=finalText)
-        if shill == True:
+        chatid = str(update.effective_chat.id)
+        with open('chatdata.json', 'r') as f:
+            data = json.load(f)
+        if data[chatid]['shill'] == True:
             await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True,text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info',parse_mode='MarkdownV2')
 
     else:
@@ -97,8 +116,10 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
             print("final with link replaced: " + finalText)
             # send the new link back to the chat
             await context.bot.send_message(chat_id=update.effective_chat.id, text=finalText)
-            if shill == True:
-                await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
+            chatid = str(update.effective_chat.id)
+            with open('chatdata.json', 'r') as f:
+                data = json.load(f)
+            if data[chatid]['shill'] == True:                await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
         else:
             if update.message.text.__contains__("https://www.instagram.com"):
                 # set the source text to originalText
@@ -115,8 +136,10 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 print("final with link replaced: " + finalText)
                 # send the new link back to the chat
                 await context.bot.send_message(chat_id=update.effective_chat.id, text=finalText)
-                if shill == True:
-                    await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
+                chatid = str(update.effective_chat.id)
+                with open('chatdata.json', 'r') as f:
+                    data = json.load(f)
+                if data[chatid]['shill'] == True:                    await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
             else:
                 if update.message.text.__contains__("https://www.tiktok.com"):
                     # set the source text to originalText
@@ -132,7 +155,10 @@ async def replace(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     print("final with link replaced: " + finalText)
                     # send the new link back to the chat
                     await context.bot.send_message(chat_id=update.effective_chat.id, text=finalText)
-                    if shill == True:
+                    chatid = update.effective_chat.id
+                    chatid = str(update.effective_chat.id)
+                    data = json.load(f)
+                    if data[chatid]['shill'] == True:
                         await context.bot.send_message(chat_id=update.effective_chat.id, disable_web_page_preview=True, text=f'Thanks for using ***AutoEmbedder***\\! check out the [GitHub Repo](https://github\\.com\\/stationswift001\\/AutoEmbedder) for more info', parse_mode='MarkdownV2')
 
 
@@ -140,8 +166,10 @@ if __name__ == '__main__':
     application = ApplicationBuilder().token(API_KEY).build()
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), replace)
     start_handler = CommandHandler('start', start)
-    shill_handler = CommandHandler('ToggleShill', toggle_shill)
+    shillon_handler = CommandHandler('enableshill', enableshill)
+    shilloff_handler = CommandHandler('disableshill', disableshill)
+    application.add_handler(shillon_handler)
+    application.add_handler(shilloff_handler)
     application.add_handler(start_handler)
-    application.add_handler(shill_handler)
     application.add_handler(echo_handler)
     application.run_polling()
