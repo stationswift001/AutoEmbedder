@@ -41,3 +41,4 @@ please credit me if you use this
 
  - mlgnez as mentioned above, he's awesome
  - me for managing to code this as it's my first project ever
+ - thanks choco you a real one
